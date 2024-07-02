@@ -1,0 +1,64 @@
+<!--by himanshu kamadiya-->
+{% extends "admin/base_admin_panel.html" %}
+{% block panel %}
+<!-- add category -->
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3>Add category</h3>
+        </div>
+        <div class="card-body">
+            <form method="GET">
+                
+                {{form.as_p}}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- add category ends -->
+<br>
+<!-- add products -->
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3>Add Products</h3>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- add products ends -->
+
+<br>
+<div class="container">
+    <h1>Product List</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Product Code</th>
+                <th>String Product Code</th>
+                <th>Product Name</th>
+                <th>Category ID</th>
+                <th>About Product</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+            <tr>
+                <td><a href="{% url 'product_detail' product.id %}"></a>{{ product.product_code }}</td>
+                <td><a href="{% url 'product_detail' product.id %}"></a>{{ product.str_product_code }}</td>
+                <td><a href="{% url 'product_detail' product.id %}"></a>{{ product.product_name }}</td>
+                <td><a href="{% url 'product_detail' product.id %}"></a>{{ product.category_id }}</td>
+                <td><a href="{% url 'product_detail' product.id %}"></a>{{ product.about_product }}</td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock panel %}
